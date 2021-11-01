@@ -1,6 +1,6 @@
 name: Pull Request Card Automation
 
-on: 
+on:
   pull_request:
     types: [opened]
     branches:
@@ -8,9 +8,9 @@ on:
 jobs:
   PR-Card-Automation:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - uses: alex-page/github-project-automation-plus@v0.8.1
-        with: 
-          project: resumaker
+        with:
+          project: SETrackApp
           column: Code Review
           repo-token: ${{secrets.PAO}}

@@ -1,9 +1,6 @@
 const { Pool } = require('pg');
-const { SourceMapDevToolPlugin } = require('webpack');
-
-const PG_URI = 'postgres://yvngawyd:fPr458tFi73SmbCE3R3rgxxIKveVumGl@chunee.db.elephantsql.com/yvngawyd';
+const PG_URI = '';
             
-
 // create a new pool here using the connection string above
 const pool = new Pool({
   connectionString: PG_URI
