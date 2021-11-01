@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-const apiRouter = require('./apiRouter')
+const apiRouter = require('./Routers/apiRouter')
 
 const PORT = 3000;
 

@@ -1,4 +1,4 @@
-db = require("./database");
+db = require("../DB/database");
 const controller = {};
 
 controller.createCompany = (req, res, next) => {
