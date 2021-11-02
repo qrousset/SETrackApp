@@ -43,8 +43,8 @@ CREATE TABLE users (
     id_user integer NOT NULL PRIMARY KEY,
     user_last_name character varying NOT NULL,
     user_first_name character varying NOT NULL,
-    oauth character varying NOT NULL,
-    jwt character varying NOT NULL
+    oauth character varying,
+    jwt character varying
 );
 
 ALTER TABLE users OWNER TO ruoikmfq;
@@ -56,45 +56,13 @@ CREATE SEQUENCE id_user_seq
     NO MAXVALUE
     CACHE 1;
 
-ALTER TABLE id_user_seq OWNED BY users.id_user;
-
-CREATE TABLE applications (
-    app_id integer NOT NULL PRIMARY KEY,
-    company_id integer NOT NULL REFERENCES companies (company_id),
-    id_user integer NOT NULL REFERENCES users (id_user),
-    app_status integer NOT NULL REFERENCES status (status_id),
-    job_listing character varying NOT NULL,
-    location character varying NOT NULL,
-    app_notes character varying NOT NULL,
-    app_sent date,
-    sifted date,
-    phone_screen date,
-    interview1 date,
-    interview2 date,
-    on_site date,
-    offer date,
-    offer_amount integer NOT NULL,
-    offer_amount2 integer NOT NULL,
-    accepted date,
-    declined date,
-    rejected date
-)
-
-ALTER TABLE applications OWNER TO ruoikmfq;
-
-CREATE SEQUENCE app_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-ALTER TABLE app_id_seq OWNED BY applications.app_id;
+ALTER TABLE id_user_seq OWNER TO ruoikmfq;
+ALTER SEQUENCE id_user_seq OWNED BY users.id_user;
 
 CREATE TABLE companies (
     company_id integer NOT NULL PRIMARY KEY,
     company_name character varying NOT NULL
-)
+);
 
 ALTER TABLE companies OWNER TO ruoikmfq;
 
@@ -105,12 +73,13 @@ CREATE SEQUENCE company_id_seq
     NO MAXVALUE
     CACHE 1;
 
-ALTER TABLE company_id_seq BY companies.company_id;
+ALTER TABLE company_id_seq OWNER TO ruoikmfq;
+ALTER SEQUENCE company_id_seq OWNED BY companies.company_id;
 
 CREATE TABLE status (
     status_id integer NOT NULL PRIMARY KEY,
-    status_name  character varying NOT NULL
-)
+    status_name character varying NOT NULL
+);
 
 ALTER TABLE status OWNER TO ruoikmfq;
 
@@ -121,4 +90,40 @@ CREATE SEQUENCE status_id_seq
     NO MAXVALUE
     CACHE 1;
 
-ALTER TABLE status_id_seq BY status.status_id;
+ALTER TABLE status_id_seq OWNER TO ruoikmfq;
+ALTER SEQUENCE status_id_seq OWNED BY status.status_id;
+
+CREATE TABLE applications (
+    app_id integer NOT NULL PRIMARY KEY,
+    company_id integer NOT NULL REFERENCES companies (company_id),
+    id_user integer NOT NULL REFERENCES users (id_user),
+    app_status integer NOT NULL REFERENCES status (status_id),
+    job_listing character varying,
+    location character varying,
+    app_notes character varying,
+    app_sent date,
+    sifted date,
+    phone_screen date,
+    interview1 date,
+    interview2 date,
+    on_site date,
+    offer date,
+    offer_amount integer,
+    offer_amount2 integer,
+    accepted date,
+    declined date,
+    rejected date
+);
+
+ALTER TABLE applications OWNER TO ruoikmfq;
+
+CREATE SEQUENCE app_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER TABLE app_id_seq OWNER TO ruoikmfq;
+ALTER SEQUENCE app_id_seq OWNED BY applications.app_id;
+
