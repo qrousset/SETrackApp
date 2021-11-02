@@ -1,10 +1,32 @@
 import React from "react";
-import AccountMenu from "../components/AccountMenuButton";
+import SummaryCard from "../components/SummaryCard";
 
 const Home = () => {
+  let testArr = [
+    <SummaryCard />,
+    <SummaryCard />,
+    <SummaryCard />,
+    <SummaryCard />,
+    <SummaryCard />,
+    <SummaryCard />,
+    <SummaryCard />,
+    <SummaryCard />,
+    <SummaryCard />,
+  ];
+
   return (
-    <div>
-      <h1>Home</h1>
+    <div id="home">
+      <h1>SUMMARY</h1>
+      <div
+        id="cards"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(5, 18vw)",
+          gap: "2em",
+        }}
+      >
+        {testArr}
+      </div>
     </div>
   );
 };
