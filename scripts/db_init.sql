@@ -18,7 +18,7 @@ SET row_security = off;
 -- Name: mmdb; Type: DATABASE; Schema: -; Owner: mmadmin
 --
 
-\connect mmdb
+\connect SETrackApp
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -39,152 +39,86 @@ SET default_with_oids = false;
 -- Name: cards; Type: TABLE; Schema: public; Owner: mmadmin
 --
 
-CREATE TABLE cards (
-    _id integer NOT NULL,
-    market_id integer NOT NULL
+CREATE TABLE users (
+    id_user integer NOT NULL PRIMARY KEY,
+    user_last_name character varying NOT NULL,
+    user_first_name character varying NOT NULL,
+    oauth character varying NOT NULL,
+    jwt character varying NOT NULL
 );
 
+ALTER TABLE users OWNER TO ruoikmfq;
 
-ALTER TABLE cards OWNER TO mmadmin;
-
---
--- Name: cards__id_seq; Type: SEQUENCE; Schema: public; Owner: mmadmin
---
-
-CREATE SEQUENCE cards__id_seq
+CREATE SEQUENCE id_user_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
 
+ALTER TABLE id_user_seq OWNED BY users.id_user;
 
-ALTER TABLE cards__id_seq OWNER TO mmadmin;
+CREATE TABLE applications (
+    app_id integer NOT NULL PRIMARY KEY,
+    company_id integer NOT NULL REFERENCES companies (company_id),
+    id_user integer NOT NULL REFERENCES users (id_user),
+    app_status integer NOT NULL REFERENCES status (status_id),
+    job_listing character varying NOT NULL,
+    location character varying NOT NULL,
+    app_notes character varying NOT NULL,
+    app_sent date,
+    sifted date,
+    phone_screen date,
+    interview1 date,
+    interview2 date,
+    on_site date,
+    offer date,
+    offer_amount integer NOT NULL,
+    offer_amount2 integer NOT NULL,
+    accepted date,
+    declined date,
+    rejected date
+)
 
---
--- Name: cards__id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mmadmin
---
+ALTER TABLE applications OWNER TO ruoikmfq;
 
-ALTER SEQUENCE cards__id_seq OWNED BY cards._id;
+CREATE SEQUENCE app_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
+ALTER TABLE app_id_seq OWNED BY applications.app_id;
 
---
--- Name: markets; Type: TABLE; Schema: public; Owner: mmadmin
---
+CREATE TABLE companies (
+    company_id integer NOT NULL PRIMARY KEY,
+    company_name character varying NOT NULL
+)
 
-CREATE TABLE markets (
-    market_id integer NOT NULL,
-    location character varying NOT NULL
-);
+ALTER TABLE companies OWNER TO ruoikmfq;
 
+CREATE SEQUENCE company_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
-ALTER TABLE markets OWNER TO mmadmin;
+ALTER TABLE company_id_seq BY companies.company_id;
 
---
--- Name: cards _id; Type: DEFAULT; Schema: public; Owner: mmadmin
---
+CREATE TABLE status (
+    status_id integer NOT NULL PRIMARY KEY,
+    status_name  character varying NOT NULL
+)
 
-ALTER TABLE ONLY cards ALTER COLUMN _id SET DEFAULT nextval('cards__id_seq'::regclass);
+ALTER TABLE status OWNER TO ruoikmfq;
 
+CREATE SEQUENCE status_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
---
--- Data for Name: cards; Type: TABLE DATA; Schema: public; Owner: mmadmin
---
-
-COPY cards (_id, market_id) FROM stdin;
-1	100001
-2	100001
-3	100001
-4	100001
-5	100001
-6	100002
-7	100002
-17	100010
-19	100006
-20	100006
-21	100007
-22	100007
-23	100011
-24	100011
-25	100008
-26	100008
-27	100008
-28	100001
-29	100001
-30	100001
-31	100001
-32	100001
-33	100001
-34	100001
-35	100001
-36	100001
-37	100001
-38	100001
-39	100001
-\.
-
-
---
--- Data for Name: markets; Type: TABLE DATA; Schema: public; Owner: mmadmin
---
-
-COPY markets (market_id, location) FROM stdin;
-100001	Test1
-100002	Test2
-100003	Test3
-100004	Test4
-100005	Test5
-100006	Test6
-100007	Test7
-100008	Test8
-100009	Test9
-100010	Test10
-100011	Test11
-\.
-
-
---
--- Name: cards__id_seq; Type: SEQUENCE SET; Schema: public; Owner: mmadmin
---
-
-SELECT pg_catalog.setval('cards__id_seq', 39, true);
-
-
---
--- Name: cards cards_pk; Type: CONSTRAINT; Schema: public; Owner: mmadmin
---
-
-ALTER TABLE ONLY cards
-    ADD CONSTRAINT cards_pk PRIMARY KEY (_id);
-
-
---
--- Name: markets markets_pk; Type: CONSTRAINT; Schema: public; Owner: mmadmin
---
-
-ALTER TABLE ONLY markets
-    ADD CONSTRAINT markets_pk PRIMARY KEY (market_id);
-
-
---
--- Name: cards cards_fk0; Type: FK CONSTRAINT; Schema: public; Owner: mmadmin
---
-
-ALTER TABLE ONLY cards
-    ADD CONSTRAINT cards_fk0 FOREIGN KEY (market_id) REFERENCES markets(market_id);
-
-
---
--- Name: public; Type: ACL; Schema: -; Owner: mmadmin
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM mmadmin;
-GRANT ALL ON SCHEMA public TO mmadmin;
-GRANT ALL ON SCHEMA public TO PUBLIC;
-
-
---
--- postgreSQL database dump complete
---
-
+ALTER TABLE status_id_seq BY status.status_id;
