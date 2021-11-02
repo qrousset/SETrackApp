@@ -30,6 +30,9 @@ export default function AccountMenu() {
           alignItems: "center",
           textAlign: "center",
           color: "white",
+          position: "absolute",
+          top: "10px",
+          right: "10px",
         }}
       >
         <Typography sx={{ minWidth: 100 }}>

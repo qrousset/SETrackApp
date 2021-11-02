@@ -11,8 +11,9 @@ const Sankey = () => {
       data={[
         ["From", "To", "Weight"],
         ["Sent", "Sifted", 5],
-        ["Sifted", "Interview1", 5],
-        ["Interview1", "Japan", 4],
+        ["Sifted", "Interview1", 4],
+        ["Sifted", "Japan", 1],
+        ["Interview1", "Japan", 3],
         ["Interview1", "Rejected", 1],
         ["Brazil", "France", 1],
         ["Brazil", "Spain", 1],
