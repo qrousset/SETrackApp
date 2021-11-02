@@ -10,9 +10,22 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Logout from "@mui/icons-material/Logout";
-import { NavLink } from "react-router-dom";
+import { NavLink as Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar"
 import UpcomingIcon from '@mui/icons-material/Upcoming';
+import styled from "styled-components";
+
+
+const NavLink = styled(Link)`
+  color: #white;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+`;
 
 
 export default function AccountMenu() {
@@ -114,14 +127,14 @@ export default function AccountMenu() {
            <ListItemIcon>
             <PersonAdd fontSize="small" />
             </ListItemIcon>
-            Add another application
+            <NavLink to="/upcoming">Add another application</NavLink>
             </MenuItem>
         <Divider />
         <MenuItem>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          <NavLink to="/upcoming">Logout</NavLink>
         </MenuItem>
       </Menu>
     </React.Fragment>
