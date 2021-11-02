@@ -1,7 +1,8 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-const apiRouter = require("./Routers/apiRouter");
+const dataRouter = require("./Routers/dataRouter");
+const authenticationRouter = require("./Routers/dataRouter");
 
 const PORT = 3000;
 
@@ -17,10 +18,15 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 console.log(process.env.NODE_ENV);
+
 // handle requests for static files
 app.use(express.static(path.resolve(__dirname, "../src")));
 
-// app.use("/api", apiRouter);
+// handles user authentication = eg login, logout, signup
+app.use("/authenticate", authenticationRouter);
+
+// redirect to internal api to for data
+app.use("/data", dataRouter);
 
 // catch-all route handler for any requests to an unknown route
 app.get("/*", function (req, res) {

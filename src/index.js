@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles.scss";
-import App from "./App";
+import App from "./app.jsx";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import blue from "@material-ui/core/colors/red";
@@ -19,7 +19,7 @@ const theme = createTheme({
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
-      <App />
+    <App />
   </ThemeProvider>,
   document.getElementById("app")
 );
