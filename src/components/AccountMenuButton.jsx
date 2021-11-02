@@ -1,17 +1,19 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
+import HomeIcon from '@mui/icons-material/Home';
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { NavLink } from "react-router-dom";
+import Avatar from "@mui/material/Avatar"
+import UpcomingIcon from '@mui/icons-material/Upcoming';
+
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,15 +37,15 @@ export default function AccountMenu() {
           right: "10px",
         }}
       >
-        <Typography sx={{ minWidth: 100 }}>
+        {/* <Typography sx={{ minWidth: 100 }}>
           <NavLink to="/">Home</NavLink>
-        </Typography>
-        <Typography sx={{ minWidth: 100 }}>
+        </Typography> */}
+        {/* <Typography sx={{ minWidth: 100 }}>
           <NavLink to="/graph">Graph</NavLink>
-        </Typography>
-        <Typography sx={{ minWidth: 100 }} to="/coming">
+        </Typography> */}
+        {/* <Typography sx={{ minWidth: 100 }} to="/coming">
           <NavLink to="/coming">Up coming</NavLink>
-        </Typography>
+        </Typography> */}
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -90,21 +92,31 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar /> <NavLink to="/">My Account</NavLink>
+        <ListItemIcon>
+            <HomeIcon fontSize="small" />
+            </ListItemIcon>
+        <NavLink to="/">Home</NavLink>
+        </MenuItem>
+            <MenuItem>
+          <ListItemIcon> 
+             <ShowChartIcon fontSize="small" />
+          </ListItemIcon> 
+          <NavLink to="/graph">Graph</NavLink>
         </MenuItem>
         <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another application
+        <ListItemIcon>
+            <UpcomingIcon fontSize="small" />
+            </ListItemIcon>
+          <NavLink to="/upcoming">Upcoming</NavLink>
         </MenuItem>
         <Divider />
         <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          <NavLink to="/">Settings</NavLink>
-        </MenuItem>
+           <ListItemIcon>
+            <PersonAdd fontSize="small" />
+            </ListItemIcon>
+            Add another application
+            </MenuItem>
+        <Divider />
         <MenuItem>
           <ListItemIcon>
             <Logout fontSize="small" />
