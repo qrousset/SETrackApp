@@ -7,6 +7,7 @@ import Graph from "./pages/graph";
 import Upcoming from "./pages/upcoming";
 import Signin from "./pages/signin";
 import Signup from "./pages/signup";
+import Form from "./components/Form";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Router>
       <AccountMenu />
       <div id="wrapper">
+        <Form />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/graph" component={Graph} />

@@ -1,5 +1,5 @@
 import React from "react";
-import Sankey from "../components/SankeyGraph";
+import Sankey from "../components/Sankey";
 
 const Graph = () => {
   return (
