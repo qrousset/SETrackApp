@@ -1,9 +1,8 @@
 import React from "react";
-import AccountMenu from "../components/AccountMenuButton";
 
 const Home = () => {
   return (
-    <div>
+    <div id="home">
       <h1>Home</h1>
     </div>
   );
