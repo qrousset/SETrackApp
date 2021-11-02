@@ -29,7 +29,13 @@ app.use("/authenticate", authenticationRouter);
 app.use("/data", dataRouter);
 
 // catch-all route handler for any requests to an unknown route
-app.use((req, res) => res.status(404).send("<h1> 404 Job not found </h1>"));
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "..src/index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 // @see https://expressjs.com/en/guide/error-handling.html#writing-error-handlers
 app.use((err, req, res, next) => {

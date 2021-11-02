@@ -1,5 +1,6 @@
 import React from "react";
 import SummaryCard from "../components/SummaryCard";
+import Form from "../components/Form";
 
 const Home = () => {
   let testArr = [
