@@ -14,10 +14,10 @@ import { NavLink as Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar"
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import styled from "styled-components";
-
+import Typography from "@mui/material/Typography";
 
 const NavLink = styled(Link)`
-  color: #white;
+  color: black;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -51,13 +51,7 @@ export default function AccountMenu() {
         }}
       >
         {/* <Typography sx={{ minWidth: 100 }}>
-          <NavLink to="/">Home</NavLink>
-        </Typography> */}
-        {/* <Typography sx={{ minWidth: 100 }}>
-          <NavLink to="/graph">Graph</NavLink>
-        </Typography> */}
-        {/* <Typography sx={{ minWidth: 100 }} to="/coming">
-          <NavLink to="/coming">Up coming</NavLink>
+          <NavLink to="/popup">popup</NavLink>
         </Typography> */}
         <Tooltip title="Account settings">
           <IconButton
@@ -127,7 +121,7 @@ export default function AccountMenu() {
            <ListItemIcon>
             <PersonAdd fontSize="small" />
             </ListItemIcon>
-            <NavLink to="/upcoming">Add another application</NavLink>
+            <NavLink to="/popup">Add another application</NavLink>
             </MenuItem>
         <Divider />
         <MenuItem>
