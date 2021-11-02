@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-const apiRouter = require('./Routers/apiRouter')
+const apiRouter = require("./Routers/apiRouter");
 
 const PORT = 3000;
 
@@ -16,11 +16,11 @@ if (process.env.NODE_ENV === "production") {
     return res.status(200).sendFile(path.join(__dirname, "../dist/index.html"));
   });
 }
+console.log(process.env.NODE_ENV);
 // handle requests for static files
 app.use(express.static(path.resolve(__dirname, "../src")));
 
-
-app.use("/api", apiRouter);
+// app.use("/api", apiRouter);
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.status(404).send("<h1> 404 Job not found </h1>"));

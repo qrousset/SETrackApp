@@ -1,0 +1,21 @@
+body {
+  margin: 0px;
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
+    height: 100%;
+    #home {
+      height: 100%;
+    }
+  }
+}
