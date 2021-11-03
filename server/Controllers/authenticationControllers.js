@@ -52,11 +52,9 @@ authenticationController.signup = async (req, res, next) => {
   console.log("I hit the controller");
   // pull username and password from request body
   const { username, password, firstName, lastName } = req.body;
+  console.log(password);
 
   const userString = username.toString();
-
-  console.log(typeof username);
-  console.log(typeof userString);
 
   const firstQuery = `SELECT * FROM users WHERE username = '${userString}'`;
 
@@ -70,10 +68,10 @@ authenticationController.signup = async (req, res, next) => {
   }
 
   // hashed password
-  await bcrypt.hash(password, 10, async (err, hash) => {
+  bcrypt.hash(password, 10, async (err, hash) => {
     // creat user query
-    const query = `INSERT INTO Users(User_ID, User_LastName, FirstName, Hashed_pw) 
-  VALUES '${username}', '${lastName}', '${firstName}', '${hash}'`;
+    const query = `INSERT INTO users (username, user_last_name, user_first_name, hashed_pw) 
+  VALUES ('${username}', '${lastName}', '${firstName}', '${hash}')`;
 
     // add new user to database
     db.query(query)
@@ -90,9 +88,6 @@ authenticationController.signup = async (req, res, next) => {
         next(defaultErr);
       });
   });
-
-  console.log();
-  next();
 };
 
 module.exports = authenticationController;
