@@ -18,8 +18,7 @@ function App() {
       <Popup trigger={buttonPopup} setTrigger={setButtonPopup}></Popup>
       <div id="wrapper">
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/home" exact component={Home} />
+          <Route path="/" exact component={Signup} />
           <Route path="/graph" component={Graph} />
           <Route path="/upcoming" component={Upcoming} />
           <Route path="/signin" component={Signin} />

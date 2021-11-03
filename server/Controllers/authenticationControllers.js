@@ -1,8 +1,8 @@
 const db = require("../DB/database");
 const bcrypt = require('bcrypt');
-const authenticationCntroller = {};
+const authenticationController = {};
 
-authenticationCntroller.login = (req, res, next) => {
+authenticationController.login = async (req, res, next) => {
   const {username, password} = req.body;
 
   // check if user already exists
@@ -47,13 +47,21 @@ authenticationCntroller.login = (req, res, next) => {
 //     });
 // };
 
-authenticationCntroller.signup = async (req, res, next) => {
+authenticationController.signup = async (req, res, next) => {
+  console.log('I hit the controller')
   // pull username and password from request body
   const { username, password, firstName, lastName } = req.body;
+
+  const userString = username.toString();
+
+  console.log(typeof username)
+  console.log(typeof userString)
+
+  const firstQuery = `SELECT * FROM users WHERE username = '${userString}'`
   
   // check if user already exists
-  const user = await db.query(`SELECT ${username} FROM USERS`)
-  
+  const user = await db.query(firstQuery)
+
   // if user exists, send response stating user exists
   if (user) { 
     res.locals.userExists = true; 
@@ -61,11 +69,11 @@ authenticationCntroller.signup = async (req, res, next) => {
   } 
   
   // hashed password
-  const hashedPassword = bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   // creat user query
   const query = `INSERT INTO Users(User_ID, User_LastName, FirstName, Hashed_pw) 
-  VALUES ${username}, ${lastName}, ${firstName}, ${hashedPassword}`;
+  VALUES '${username}', '${lastName}', '${firstName}', '${hashedPassword}'`;
   
   // add new user to database
   db.query(query)
@@ -83,4 +91,4 @@ authenticationCntroller.signup = async (req, res, next) => {
     });
 };
 
-module.exports = authenticationCntroller;
+module.exports = authenticationController;
