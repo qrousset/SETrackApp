@@ -9,7 +9,6 @@ import Signin from "./pages/signin";
 import Signup from "./pages/signup";
 import Popup from "./components/popup";
 
-
 function App() {
   const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -20,6 +19,7 @@ function App() {
       <div id="wrapper">
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/home" exact component={Home} />
           <Route path="/graph" component={Graph} />
           <Route path="/upcoming" component={Upcoming} />
           <Route path="/signin" component={Signin} />
