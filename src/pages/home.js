@@ -14,7 +14,7 @@ const summary = [
     date: "",
   },
   {
-    application_id: 1,
+    application_id: 2,
     company_id: 1,
     company_name: "Google",
     user_id: 1,
@@ -25,7 +25,7 @@ const summary = [
     date: "",
   },
   {
-    application_id: 1,
+    application_id: 3,
     company_id: 1,
     company_name: "Google",
     user_id: 1,
@@ -36,7 +36,7 @@ const summary = [
     date: "",
   },
   {
-    application_id: 1,
+    application_id: 4,
     company_id: 1,
     company_name: "Google",
     user_id: 1,
@@ -62,9 +62,8 @@ const summary = [
 const Home = (props) => {
   const [cards, setCards] = useState(summary);
   let testArr = [];
-  console.log(cards);
   cards.forEach((el) => {
-    testArr.push(<SummaryCard data={el} />);
+    testArr.push(<SummaryCard data={el} key={el.application_id}/>);
   });
 
   return (

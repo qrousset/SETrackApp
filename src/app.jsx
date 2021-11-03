@@ -9,7 +9,6 @@ import Signin from "./pages/signin";
 import Signup from "./pages/signup";
 import Popup from "./components/popup";
 
-
 function App() {
   const [buttonPopup, setButtonPopup] = useState(false);
 
