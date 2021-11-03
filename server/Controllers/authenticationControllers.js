@@ -2,33 +2,36 @@ const db = require("../DB/database");
 const bcrypt = require("bcrypt");
 const authenticationController = {};
 
-authenticationController.login = async (req, res, next) => {
+authenticationController.signin = async (req, res, next) => {
   const { username, password } = req.body;
-
+  
   // check if user already exists
-  await db
-    .query(`SELECT ${username} FROM USERS`)
-    .then((data) => {
-      // hashed password
-      const compare = bcrypt.compareSync(password, data.password);
-
-      // if hashed password is not a match, send response stating password is not a match
-      if (!data || !compare) {
+  await db.query(`SELECT * FROM users where username = '${username}'`)
+  .then((data) => {
+    const { hashed_pw } = data.rows[0];
+  
+    // hashed password
+    bcrypt.compare(password, hashed_pw, function(err, result) {
+      // console.log(data.password)
+      console.log('i hit here too')
+      // console.log(result)
+      if (result) { 
+        res.locals.authenticated = true;
+      } else {
         res.locals.authenticated = false;
-        next();
       }
+      next()
 
-      res.locals.authenticated = true;
-      next();
-    })
-    .catch((err) => {
-      const defaultErr = {
-        log: "Error in authentication controller login",
-        status: 400,
-        message: { err: "Error in authentication controller login" },
-      };
-      next(defaultErr);
     });
+  })
+  .catch((err) => {
+    const defaultErr = {
+      log: "Error in authentication controller login",
+      status: 400,
+      message: { err: "Error in authentication controller login" },
+    };
+    next(defaultErr);
+  });
 };
 
 // to completed after sessions or JWT are implemented
@@ -49,7 +52,7 @@ authenticationController.login = async (req, res, next) => {
 // };
 
 authenticationController.signup = async (req, res, next) => {
-  console.log("I hit the controller");
+  console.log("I hit the signup controller");
   // pull username and password from request body
   const { username, password, firstName, lastName } = req.body;
   console.log(password);
