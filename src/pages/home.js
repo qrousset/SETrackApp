@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SummaryCard from "../components/SummaryCard";
 
 const summary = [
@@ -51,14 +51,14 @@ const summary = [
 const Home = (props) => {
   const [cards, setCards] = useState(summary);
   let testArr = [];
-
+  console.log(cards);
   cards.forEach((el) => {
     testArr.push(<SummaryCard data={el} />);
   });
 
   return (
     <div id="home">
-      <h1>SUMMARY</h1> 
+      <h1>SUMMARY</h1>
       <div
         id="cards"
         style={{

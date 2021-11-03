@@ -6,21 +6,21 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export default function BasicCard() {
+export default function BasicCard(props) {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          company
+          {props.data.company_name}
         </Typography>
         <Typography variant="h5" component="div">
           Application
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Role
+          {props.data.job_listing}
         </Typography>
         <Typography variant="body2">
-          Current Status 
+          Current Status
           <br />
           Next Status
         </Typography>
