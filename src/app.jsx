@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import AccountMenu from "./components/AccountMenuButton";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -7,15 +7,63 @@ import Graph from "./pages/graph";
 import Upcoming from "./pages/upcoming";
 import Signin from "./pages/signin";
 import Signup from "./pages/signup";
-import Form from "./components/Form";
+import Popup from "./components/popup";
 
+const summary = [
+  {
+    application_id: 1,
+    company_id: 1,
+    company_name: "Google",
+    user_id: 1,
+    job_listing: "www.google.com",
+    submission_date: "2021-11-02",
+    status_name: "sent",
+    next_status: "phoneInterview",
+    date: "",
+  },
+  {
+    application_id: 1,
+    company_id: 1,
+    company_name: "Google",
+    user_id: 1,
+    job_listing: "www.google.com",
+    submission_date: "2021-11-02",
+    status_name: "sent",
+    next_status: "phoneInterview",
+    date: "",
+  },
+  {
+    application_id: 1,
+    company_id: 1,
+    company_name: "Google",
+    user_id: 1,
+    job_listing: "www.google.com",
+    submission_date: "2021-11-02",
+    status_name: "sent",
+    next_status: "phoneInterview",
+    date: "",
+  },
+  {
+    application_id: 1,
+    company_id: 1,
+    company_name: "Google",
+    user_id: 1,
+    job_listing: "www.google.com",
+    submission_date: "2021-11-02",
+    status_name: "sent",
+    next_status: "phoneInterview",
+    date: "",
+  },
+];
 
 function App() {
+  const [buttonPopup, setButtonPopup] = useState(false);
+
   return (
     <Router>
-      <AccountMenu />
+      <AccountMenu fn={setButtonPopup} />
+      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}></Popup>
       <div id="wrapper">
-        <Form />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/graph" component={Graph} />

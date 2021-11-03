@@ -1,18 +1,17 @@
 import React from "react";
 import SummaryCard from "../components/SummaryCard";
-import Form from "../components/Form";
 
 const Home = () => {
   let testArr = [
-    <SummaryCard />,
-    <SummaryCard />,
-    <SummaryCard />,
-    <SummaryCard />,
-    <SummaryCard />,
-    <SummaryCard />,
-    <SummaryCard />,
-    <SummaryCard />,
-    <SummaryCard />,
+    <SummaryCard key="1"/>,
+    <SummaryCard key="2"/>,
+    <SummaryCard key="3" />,
+    <SummaryCard key="4" />,
+    <SummaryCard key="5" />,
+    <SummaryCard key="6" />,
+    <SummaryCard key="7" />,
+    <SummaryCard key="8" />,
+    <SummaryCard key="9" />,
   ];
 
   return (

@@ -4,7 +4,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 
-export default function ViewsDatePicker() {
+export default function ViewsDatePicker(props) {
   const [value, setValue] = React.useState(new Date());
 
   return (
@@ -12,7 +12,7 @@ export default function ViewsDatePicker() {
       <DatePicker
         openTo="year"
         views={["year", "month", "day"]}
-        label="Year, month and date"
+        label={props.label}
         value={value}
         onChange={(newValue) => {
           setValue(newValue);

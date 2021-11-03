@@ -1,12 +1,67 @@
-body {
-  margin: 0px;
-}
+$bg-color: #303030;
+$bg-dark: rgba(30, 30, 30, 0.8);
+$bg-light: rgba(250, 250, 250, 1);
+
 #app {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   height: 100vh;
+
+  .outerPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: $bg-dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 7;
+
+    .innerPopup {
+      position: relative;
+      max-width: 30vw;
+      padding: 32px;
+      background-color: $bg-light;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .generalInformation {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .process {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      #popupClose {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        margin: 2px;
+        font-weight: bold;
+        padding: 5px 20px 5px 20px;
+        // color: $color-primary-4;
+        // background-color: $color-primary-1;
+        // border: 2px $color-primary-4 solid;
+      }
+      #popupClose:hover {
+        margin: 2px;
+        background-color: red;
+        // border: 2px $color-primary-4 solid;
+        // color: $color-primary-4;
+      }
+    }
+  }
 
   #wrapper {
     display: flex;
