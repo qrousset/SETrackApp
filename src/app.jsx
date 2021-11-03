@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import AccountMenu from "./components/AccountMenuButton";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -7,15 +7,17 @@ import Graph from "./pages/graph";
 import Upcoming from "./pages/upcoming";
 import Signin from "./pages/signin";
 import Signup from "./pages/signup";
-import Form from "./components/Form";
+import Popup from "./components/popup";
 
 
 function App() {
+  const [buttonPopup, setButtonPopup] = useState(false);
+
   return (
     <Router>
-      <AccountMenu />
+      <AccountMenu fn={setButtonPopup} />
+      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}></Popup>
       <div id="wrapper">
-        <Form />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/graph" component={Graph} />

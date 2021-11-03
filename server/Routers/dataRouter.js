@@ -6,7 +6,7 @@ dataRouter.get("/cards", dataController.getAllCards, (req, res) =>
   res.status(200).json(res.locals.cards)
 );
 
-dataRouter.get("/card", dataController.getOneCard, (req, res) =>
+dataRouter.get("/card", dataController.getOneCards, (req, res) =>
   res.status(200).json(res.locals.card)
 );
 
