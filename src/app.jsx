@@ -9,52 +9,6 @@ import Signin from "./pages/signin";
 import Signup from "./pages/signup";
 import Popup from "./components/popup";
 
-const summary = [
-  {
-    application_id: 1,
-    company_id: 1,
-    company_name: "Google",
-    user_id: 1,
-    job_listing: "www.google.com",
-    submission_date: "2021-11-02",
-    status_name: "sent",
-    next_status: "phoneInterview",
-    date: "",
-  },
-  {
-    application_id: 1,
-    company_id: 1,
-    company_name: "Google",
-    user_id: 1,
-    job_listing: "www.google.com",
-    submission_date: "2021-11-02",
-    status_name: "sent",
-    next_status: "phoneInterview",
-    date: "",
-  },
-  {
-    application_id: 1,
-    company_id: 1,
-    company_name: "Google",
-    user_id: 1,
-    job_listing: "www.google.com",
-    submission_date: "2021-11-02",
-    status_name: "sent",
-    next_status: "phoneInterview",
-    date: "",
-  },
-  {
-    application_id: 1,
-    company_id: 1,
-    company_name: "Google",
-    user_id: 1,
-    job_listing: "www.google.com",
-    submission_date: "2021-11-02",
-    status_name: "sent",
-    next_status: "phoneInterview",
-    date: "",
-  },
-];
 
 function App() {
   const [buttonPopup, setButtonPopup] = useState(false);
@@ -62,7 +16,7 @@ function App() {
   return (
     <Router>
       <AccountMenu fn={setButtonPopup} />
-      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}></Popup> 
+      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}></Popup>
       <div id="wrapper">
         <Switch>
           <Route path="/" exact component={Home} />

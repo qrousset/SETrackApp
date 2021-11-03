@@ -1,22 +1,64 @@
 import React from "react";
 import SummaryCard from "../components/SummaryCard";
 
-const Home = () => {
-  let testArr = [
-    <SummaryCard key="1"/>,
-    <SummaryCard key="2"/>,
-    <SummaryCard key="3" />,
-    <SummaryCard key="4" />,
-    <SummaryCard key="5" />,
-    <SummaryCard key="6" />,
-    <SummaryCard key="7" />,
-    <SummaryCard key="8" />,
-    <SummaryCard key="9" />,
-  ];
+const summary = [
+  {
+    application_id: 1,
+    company_id: 1,
+    company_name: "Google",
+    user_id: 1,
+    job_listing: "www.google.com",
+    submission_date: "2021-11-02",
+    status_name: "sent",
+    next_status: "phoneInterview",
+    date: "",
+  },
+  {
+    application_id: 1,
+    company_id: 1,
+    company_name: "Google",
+    user_id: 1,
+    job_listing: "www.google.com",
+    submission_date: "2021-11-02",
+    status_name: "sent",
+    next_status: "phoneInterview",
+    date: "",
+  },
+  {
+    application_id: 1,
+    company_id: 1,
+    company_name: "Google",
+    user_id: 1,
+    job_listing: "www.google.com",
+    submission_date: "2021-11-02",
+    status_name: "sent",
+    next_status: "phoneInterview",
+    date: "",
+  },
+  {
+    application_id: 1,
+    company_id: 1,
+    company_name: "Google",
+    user_id: 1,
+    job_listing: "www.google.com",
+    submission_date: "2021-11-02",
+    status_name: "sent",
+    next_status: "phoneInterview",
+    date: "",
+  },
+];
+
+const Home = (props) => {
+  const [cards, setCards] = useState(summary);
+  let testArr = [];
+
+  cards.forEach((el) => {
+    testArr.push(<SummaryCard data={el} />);
+  });
 
   return (
     <div id="home">
-      <h1>SUMMARY</h1>
+      <h1>SUMMARY</h1> 
       <div
         id="cards"
         style={{
