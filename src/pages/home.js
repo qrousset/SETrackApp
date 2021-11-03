@@ -10,7 +10,7 @@ const summary = [
     job_listing: "www.google.com",
     submission_date: "2021-11-02",
     status_name: "sent",
-    next_status: "phoneInterview",
+    next_status: "sifted",
     date: "",
   },
   {
@@ -20,8 +20,8 @@ const summary = [
     user_id: 1,
     job_listing: "www.google.com",
     submission_date: "2021-11-02",
-    status_name: "sent",
-    next_status: "phoneInterview",
+    status_name: "sifted",
+    next_status: "phone_interview",
     date: "",
   },
   {
@@ -31,8 +31,8 @@ const summary = [
     user_id: 1,
     job_listing: "www.google.com",
     submission_date: "2021-11-02",
-    status_name: "sent",
-    next_status: "phoneInterview",
+    status_name: "sifted",
+    next_status: "phone_interview",
     date: "",
   },
   {
@@ -42,8 +42,8 @@ const summary = [
     user_id: 1,
     job_listing: "www.google.com",
     submission_date: "2021-11-02",
-    status_name: "sent",
-    next_status: "phoneInterview",
+    status_name: "phone_interview",
+    next_status: "interview1",
     date: "",
   },
 ];

@@ -72,6 +72,11 @@ $bg-light: rgba(250, 250, 250, 1);
     padding: 2em;
     #home {
       height: 100%;
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   }
 }
