@@ -11,8 +11,21 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 const theme = createTheme();
+
+const darkTheme = createTheme({
+  palette: {
+    type: "dark",
+  },
+});
+
+const lightTheme = createTheme({
+  palette: {
+    type: "light",
+  },
+});
 
 export default function SignUp() {
   const handleSubmit = (event) => {
@@ -39,7 +52,7 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -116,9 +129,9 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <NavLink to="/signin" variant="body2">
                   Already have an account? Sign in
-                </Link>
+                </NavLink>
               </Grid>
             </Grid>
           </Box>

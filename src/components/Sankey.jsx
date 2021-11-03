@@ -11,15 +11,14 @@ const Sankey = () => {
       data={[
         ["From", "To", "#"],
         ["Sent", "Sifted", 30],
-        ["Sent", " No response ", 40],
-        ["Sifted", "Phone Interview", 20],
+        ["Sifted", "Phone Interview", 16],
         ["Sifted", "Interview1", 8],
-        ["Sifted", "Japan", 2],
-        ["Phone Interview", "Interview1", 16],
-        ["Interview1", "Japan", 3],
-        ["Interview1", "Interview2", 3],
-        ["Interview2", "OnSite", 3],
-        ["OnSite", "Offer", 2],
+        ["Phone Interview", "Interview1", 14],
+        ["Interview1", "Interview2", 10],
+        ["Interview2", "OnSite", 7],
+        ["OnSite", "Offer", 3],
+        ["Offer", "Accepted", 1],
+        ["Offer", "Declined", 2],
       ]}
       rootProps={{ "data-testid": "2" }}
     />
