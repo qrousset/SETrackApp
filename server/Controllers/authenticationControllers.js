@@ -1,10 +1,23 @@
-db = require("../DB/database");
+const db = require("../DB/database");
+const bcrypt = require('bcrypt');
 const authenticationCntroller = {};
 
 authenticationCntroller.login = (req, res, next) => {
-  const {} = req.body;
-  const query = "SELECT ";
+  const {username, password} = req.body;
 
+  // check if user already exists
+  const user = await db.query(`SELECT ${username} FROM USERS`)
+  
+  // hashed password
+  const compare = bcrypt.compareSync(password, user.password);
+  
+  // if hashed password is not a match, send response stating password is not a match
+  if (!user || !compare) {
+    res.locals.authenticated = false;
+    next();
+  }
+
+  // query is user credentials are verified
   db.query()
     .then()
     .catch((err) => {
@@ -33,12 +46,32 @@ authenticationCntroller.logout = (req, res, next) => {
     });
 };
 
-authenticationCntroller.signup = (req, res, next) => {
-  const {} = req.body;
-  const query = "SELECT ";
+authenticationCntroller.signup = async (req, res, next) => {
+  // pull username and password from request body
+  const { username, password, firstName, lastName } = req.body;
+  
+  // check if user already exists
+  const user = await db.query(`SELECT ${username} FROM USERS`)
+  
+  // if user exists, send response stating user exists
+  if (user) { 
+    res.locals.userExists = true; 
+    next(); 
+  } 
+  
+  // hashed password
+  const hashedPassword = bcrypt.hash(password, 10);
 
-  db.query()
-    .then()
+  // creat user query
+  const query = `INSERT INTO Users(User_ID, User_LastName, FirstName, Hashed_pw) 
+  VALUES ${username}, ${lastName}, ${firstName}, ${hashedPassword}`;
+  
+  // add new user to database
+  db.query(query)
+    .then(() => {
+      res.locals.signedUp = true;
+      next();
+    })
     .catch((err) => {
       const defaultErr = {
         log: "Error in authentication controller signup",

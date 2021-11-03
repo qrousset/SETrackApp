@@ -41,6 +41,8 @@ SET default_with_oids = false;
 
 CREATE TABLE users (
     id_user integer NOT NULL PRIMARY KEY,
+    username character varying NOT NULL,
+    hashed_pw character varying NOT NULL,
     user_last_name character varying NOT NULL,
     user_first_name character varying NOT NULL,
     oauth character varying,
@@ -98,6 +100,8 @@ CREATE TABLE applications (
     company_id integer NOT NULL REFERENCES companies (company_id),
     id_user integer NOT NULL REFERENCES users (id_user),
     app_status integer NOT NULL REFERENCES status (status_id),
+    next_status integer REFERENCES status (status_id + 1),
+    position_name character varying,
     job_listing character varying,
     location character varying,
     app_notes character varying,
@@ -112,7 +116,8 @@ CREATE TABLE applications (
     offer_amount2 integer,
     accepted date,
     declined date,
-    rejected date
+    rejected date,
+    archived boolean
 );
 
 ALTER TABLE applications OWNER TO ruoikmfq;
@@ -126,4 +131,14 @@ CREATE SEQUENCE app_id_seq
 
 ALTER TABLE app_id_seq OWNER TO ruoikmfq;
 ALTER SEQUENCE app_id_seq OWNED BY applications.app_id;
+
+CREATE SEQUENCE next_status_seq
+    START WITH 2
+    INCREMENT BY 1
+    NO MINVALUE
+    MAXVALUE 7
+    CACHE 1;
+
+ALTER TABLE next_status_seq OwNER TO ruoikmfq;
+ALTER SEQUENCE next_status_seq OWNED BY next_status;
 
