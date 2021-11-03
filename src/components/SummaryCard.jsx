@@ -14,18 +14,26 @@ export default function BasicCard(props) {
           {props.data.company_name}
         </Typography>
         <Typography variant="h5" component="div">
-          Application
+          {props.data.application_name || "Placeholder"}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {props.data.job_listing}
+        <Typography sx={{ mb: 1.0 }} color="text.secondary">
+          Comment on the listing
         </Typography>
-        <Typography variant="body2">
-          Current Status
-          <br />
-          Next Status
-        </Typography>
+        <div className="steps">
+          <Typography variant="body2"> Submission date: </Typography>
+          <Typography variant="body2">{props.data.submission_date}</Typography>
+          <Typography variant="body2">Current step:</Typography>
+          <Typography variant="body2"> {props.data.status_name} </Typography>
+          <Typography variant="body2">Next step:</Typography>
+          <Typography variant="body2">{props.data.next_status}</Typography>
+          <Typography variant="body2">Next step date:</Typography>
+          <Typography variant="body2">{props.data.date}</Typography>
+        </div>
       </CardContent>
-      <CardActions>
+      <CardActions style={{ justifyContent: "space-around" }}>
+        <Button size="small" href={props.data.job_listing}>
+          Listing
+        </Button>
         <Button size="small">Update</Button>
       </CardActions>
     </Card>
