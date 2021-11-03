@@ -102,7 +102,7 @@ export default function AccountMenu(props) {
           <ListItemIcon>
             <HomeIcon fontSize="small" />
           </ListItemIcon>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/home">Home</NavLink>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
@@ -122,7 +122,6 @@ export default function AccountMenu(props) {
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           <NavLink to="/" onClick={() => props.fn(true)}>
-            {" "}
             Add another application
           </NavLink>
         </MenuItem>
