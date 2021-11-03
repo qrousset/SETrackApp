@@ -62,7 +62,7 @@ function App() {
   return (
     <Router>
       <AccountMenu fn={setButtonPopup} />
-      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}></Popup>
+      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}></Popup> 
       <div id="wrapper">
         <Switch>
           <Route path="/" exact component={Home} />
