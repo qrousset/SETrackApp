@@ -1,7 +1,8 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-const apiRouter = require('./Routers/apiRouter')
+const dataRouter = require("./Routers/dataRouter");
+const authenticationRouter = require("./Routers/dataRouter");
 
 const PORT = 3000;
 
@@ -16,14 +17,25 @@ if (process.env.NODE_ENV === "production") {
     return res.status(200).sendFile(path.join(__dirname, "../dist/index.html"));
   });
 }
+console.log(process.env.NODE_ENV);
+
 // handle requests for static files
 app.use(express.static(path.resolve(__dirname, "../src")));
 
+// handles user authentication = eg login, logout, signup
+app.use("/authenticate", authenticationRouter);
 
-app.use("/api", apiRouter);
+// redirect to internal api to for data
+app.use("/data", dataRouter);
 
 // catch-all route handler for any requests to an unknown route
-app.use((req, res) => res.status(404).send("<h1> 404 Job not found </h1>"));
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "..src/index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 // @see https://expressjs.com/en/guide/error-handling.html#writing-error-handlers
 app.use((err, req, res, next) => {

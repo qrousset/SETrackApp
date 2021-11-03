@@ -1,7 +1,6 @@
 import React from "react";
-import Sankey from "../components/Sankey";
 
-const Graph = () => {
+const Upcoming = () => {
   return (
     <div
       style={{
@@ -12,9 +11,9 @@ const Graph = () => {
         color: "white",
       }}
     >
-      <Sankey />
+      <h1>Upcoming</h1>
     </div>
   );
 };
 
-export default Graph;
+export default Upcoming;

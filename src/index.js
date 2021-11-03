@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./App.scss";
-import App from "./App";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import "./styles.scss";
+import App from "./app.jsx";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import blue from "@material-ui/core/colors/red";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     type: "dark",
     primary: blue,

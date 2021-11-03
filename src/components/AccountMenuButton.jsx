@@ -1,19 +1,33 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
+import HomeIcon from "@mui/icons-material/Home";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
 import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import { NavLink } from "react-router-dom";
+import { NavLink as Link } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
+import UpcomingIcon from "@mui/icons-material/Upcoming";
+import styled from "styled-components";
+import Typography from "@mui/material/Typography";
 
-export default function AccountMenu() {
+const NavLink = styled(Link)`
+  color: black;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+`;
+
+export default function AccountMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -30,17 +44,15 @@ export default function AccountMenu() {
           alignItems: "center",
           textAlign: "center",
           color: "white",
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          zIndex: 10,
         }}
       >
-        <Typography sx={{ minWidth: 100 }}>
-          <NavLink to="/">Home</NavLink>
-        </Typography>
-        <Typography sx={{ minWidth: 100 }}>
-          <NavLink to="/graph">Graph</NavLink>
-        </Typography>
-        <Typography sx={{ minWidth: 100 }} to="/coming">
-          <NavLink to="/coming">Up coming</NavLink>
-        </Typography>
+        {/* <Typography sx={{ minWidth: 100 }}>
+          <NavLink to="/popup">popup</NavLink>
+        </Typography> */}
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -87,26 +99,39 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar /> <NavLink to="/">My Account</NavLink>
+          <ListItemIcon>
+            <HomeIcon fontSize="small" />
+          </ListItemIcon>
+          <NavLink to="/">Home</NavLink>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <PersonAdd fontSize="small" />
+            <ShowChartIcon fontSize="small" />
           </ListItemIcon>
-          Add another application
+          <NavLink to="/graph">Graph</NavLink>
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <UpcomingIcon fontSize="small" />
+          </ListItemIcon>
+          <NavLink to="/upcoming">Upcoming</NavLink>
         </MenuItem>
         <Divider />
         <MenuItem>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <PersonAdd fontSize="small" />
           </ListItemIcon>
-          <NavLink to="/">Settings</NavLink>
+          <NavLink to="/" onClick={() => props.fn(true)}>
+            {" "}
+            Add another application
+          </NavLink>
         </MenuItem>
+        <Divider />
         <MenuItem>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          <NavLink to="/upcoming">Logout</NavLink>
         </MenuItem>
       </Menu>
     </React.Fragment>
