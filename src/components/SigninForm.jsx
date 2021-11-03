@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from "axios";
 
 const theme = createTheme();
 
@@ -19,9 +20,18 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      username: data.get("email"),
+      password: data.get("password"),
     });
+
+    axios
+      .post("/authenticate/signin", {
+        username: data.get("email"),
+        password: data.get("password"),
+      })
+      .then(function (response) {
+        console.log(response);
+      });
   };
 
   return (
@@ -73,9 +83,6 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
