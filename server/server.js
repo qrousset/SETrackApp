@@ -2,7 +2,7 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const dataRouter = require("./Routers/dataRouter");
-const authenticationRouter = require("./Routers/dataRouter");
+const authenticationRouter = require("./Routers/authenticationRouter");
 
 const PORT = 3000;
 
@@ -29,13 +29,13 @@ app.use("/authenticate", authenticationRouter);
 app.use("/data", dataRouter);
 
 // catch-all route handler for any requests to an unknown route
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "..src/index.html"), function (err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
+// app.get("/*", function (req, res) {
+//   res.sendFile(path.join(__dirname, "..src/index.html"), function (err) {
+//     if (err) {
+//       res.status(500).send(err);
+//     }
+//   });
+// });
 
 // @see https://expressjs.com/en/guide/error-handling.html#writing-error-handlers
 app.use((err, req, res, next) => {

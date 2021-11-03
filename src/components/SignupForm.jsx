@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 
 const theme = createTheme();
 
@@ -19,9 +20,19 @@ export default function SignUp() {
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      username: data.get('email'),
+      password: data.get('pasword'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName')
     });
+
+    axios.post('/authenticate/signup', { 
+      username: data.get('email'),
+      password: data.get('pasword'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName')
+    })
+    .then(function (response) {console.log(response)})
   };
 
   return (
