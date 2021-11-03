@@ -1,3 +1,4 @@
+const { te } = require("date-fns/locale");
 const db = require("../DB/database.js");
 
 dataController = {};
@@ -98,7 +99,7 @@ dataController.updateCard = async (req, res, next) => {
 
   db.query(query)
     .then((data) => {
-      res.locals.updateCard = data;
+      res.locals.updatedCard = data;
       next();
     })
     .catch((err) => {
@@ -110,6 +111,56 @@ dataController.updateCard = async (req, res, next) => {
     });
 };
 
-dataController.getGraph = async (req, res, next) => {};
+dataController.getGraph = async (req, res, next) => {
+  data = res.locals.data;
+  sankeyArr = [];
+
+  // if (data.app_sent !== "") sent++;
+  // if (data.sifted !== "") sifted++;
+  // if (data.phone_screen !== "") phone_screen++;
+  // if (data.interview1 !== "") interview1++;
+  // if (data.interview2 !== "") interview2++;
+  // if (data.on_site !== "") on_site++;
+  // if (data.offer !== "") offer++;
+  // if (data.accepted !== "") accepted++;
+  // if (data.declined !== "") declined++;
+  // if (data.rejected !== "") rejected++;
+  // if (data.archived !== "") archived++;
+
+  const status = [
+    "sent",
+    "sifted",
+    "phone_screen",
+    "interview1",
+    "interview2",
+    "on_site",
+    "offer",
+    "accepted",
+    "declined",
+  ];
+
+  for (let i = 0; i < status.length - 1; i++) {
+    if (data[status[i]] !== "" && data[status[i + 1]] !== "")
+      total[`${status[i]}-${status[i + 1]}`] += 1;
+  }
+
+  for (const key in total) {
+    const tempDataPoint = [];
+    tempDataPoint.push(key.match(/.*(?=-)/));
+    tempDataPoint.push(key.match(/([a-z]*)$/));
+    tempDataPoint.push(total[key]);
+    sankeyArr.push(tempDataPoint);
+  }
+
+  //sent-sifted = 10
+  //sifted-phone_screen = 8
+  //phone_screen-interview1 = 6
+  //interview1-interview2 = 4
+  //interview2-onSite = 2
+  //onSite-offer = 2
+
+  res.locals.sankey = sankeyArr;
+  next();
+};
 
 module.exports = dataController;
