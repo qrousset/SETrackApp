@@ -2,7 +2,7 @@ const express = require("express");
 const dataController = require("../Controllers/dataControllers");
 const dataRouter = express.Router();
 
-dataRouter.get("/summary", dataController.getSummary, (req, res) =>
+dataRouter.post("/summary", dataController.getSummary, (req, res) =>
   res.status(200).json(res.locals.summary)
 );
 
