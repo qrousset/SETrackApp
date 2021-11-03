@@ -12,7 +12,7 @@ authenticationRouter.use(
   authenticationController.login,
   (req, res) => {
     if(!res.locals.authenticated) { res.status(200).send('invalid username or password')}
-    else { res.status(200).json(res.locals.loginStatus); }
+    else { res.status(200).json(res.locals.userAuthenticated); }
   }
 );
 

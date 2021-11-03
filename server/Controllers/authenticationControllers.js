@@ -6,20 +6,20 @@ authenticationCntroller.login = (req, res, next) => {
   const {username, password} = req.body;
 
   // check if user already exists
-  const user = await db.query(`SELECT ${username} FROM USERS`)
-  
-  // hashed password
-  const compare = bcrypt.compareSync(password, user.password);
-  
-  // if hashed password is not a match, send response stating password is not a match
-  if (!user || !compare) {
-    res.locals.authenticated = false;
-    next();
-  }
+  await db.query(`SELECT ${username} FROM USERS`)
+  .then(data => { 
+    // hashed password
+    const compare = bcrypt.compareSync(password, data.password);
+    
+    // if hashed password is not a match, send response stating password is not a match
+    if (!data || !compare) {
+      res.locals.authenticated = false;
+      next();
+    } 
 
-  // query is user credentials are verified
-  db.query()
-    .then()
+    res.locals.authenticated = true;
+    next()
+  })
     .catch((err) => {
       const defaultErr = {
         log: "Error in authentication controller login",
@@ -30,21 +30,22 @@ authenticationCntroller.login = (req, res, next) => {
     });
 };
 
-authenticationCntroller.logout = (req, res, next) => {
-  const {} = req.body;
-  const query = "SELECT ";
+// to completed after sessions or JWT are implemented
+// authenticationCntroller.logout = (req, res, next) => {
+//   const {} = req.body;
+//   const query = "SELECT ";
 
-  db.query()
-    .then()
-    .catch((err) => {
-      const defaultErr = {
-        log: "Error in authentication controller logout",
-        status: 400,
-        message: { err: "Error in authentication controller logout" },
-      };
-      next(defaultErr);
-    });
-};
+//   db.query()
+//     .then()
+//     .catch((err) => {
+//       const defaultErr = {
+//         log: "Error in authentication controller logout",
+//         status: 400,
+//         message: { err: "Error in authentication controller logout" },
+//       };
+//       next(defaultErr);
+//     });
+// };
 
 authenticationCntroller.signup = async (req, res, next) => {
   // pull username and password from request body
