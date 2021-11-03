@@ -2,12 +2,12 @@
 const express = require("express");
 
 // import authenticatino controller for operations
-const authenticationController = require("../Controllers/authenticationController");
+const authenticationController = require("../Controllers/authenticationControllers");
 
 // initalize authentication router
 const authenticationRouter = express.Router();
 
-authenticationRouter.use(
+authenticationRouter.get(
   "/login",
   authenticationController.login,
   (req, res) => {
@@ -16,20 +16,21 @@ authenticationRouter.use(
   }
 );
 
-authenticationRouter.use(
-  "/logout",
-  authenticationController.logout,
-  (req, res) => {
-    res.status(200).json(res.locals.loginStatus);
-  }
-);
+// authenticationRouter.get(
+//   "/logout",
+//   authenticationController.logout,
+//   (req, res) => {
+//     res.status(200).json(res.locals.loginStatus);
+//   }
+// );
 
 
 // is signedUp necessary? Can it be assumed if user doesn't exists that user creation is successful
-authenticationRouter.use(
+authenticationRouter.post(
   "/signup",
   authenticationController.signup,
   (req, res) => {
+    console.log('I hit the router')
     // if user exists, short-circuit functino and notify user 
     if (res.locals.userExists) { res.status(200).send('user already exists') }
     // redirect user to homepage
