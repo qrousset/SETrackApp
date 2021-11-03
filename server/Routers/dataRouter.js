@@ -10,13 +10,14 @@ dataRouter.get("/summary", dataController.getSummary, (req, res) =>
 //   res.status(200).json(res.locals.card)
 // );
 
-dataRouter.post("/card", dataController.addCard, (req, res) =>
+dataRouter.post("/createCard", dataController.addCard, (req, res) =>
   res.status(200).json(res.locals.newCard)
 );
 
-dataRouter.put("/card:id", dataController.updateCard, (req, res) =>
+dataRouter.put("/updateCard/:id", dataController.updateCard, (req, res) => {
+  console.log("in the put router");
   res.status(200).json(res.locals.updatedCard)
-);
+});
 
 // dataRouter.get("/graphs", dataController.getGraph, (req, res) =>
 //   res.status(200).json(res.locals.graph)

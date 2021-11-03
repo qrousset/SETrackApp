@@ -4,9 +4,8 @@ const db = require("../DB/database.js");
 dataController = {};
 
 dataController.getAllCards = async (req, res, next) => {
-  const appQueryString =
-    "SELECT a.*, c.company_name, s.status_name FROM applications a LEFT OUTER JOIN companies c ON a.company_id = c.company_id LEFT OUTER JOIN status s ON s.status_id = a.app_status";
-
+  const appQueryString = "SELECT a.*, s.status_name FROM applications a LEFT OUTER JOIN status s ON s.status_id = a.app_status";
+// "SELECT a.*, c.company_name, s.status_name FROM applications a LEFT OUTER JOIN companies c ON a.company_id = c.company_id LEFT OUTER JOIN status s ON s.status_id = a.app_status";
   db.query(appQueryString)
     .then(async (data) => {
       res.locals.cards = data.rows;
@@ -21,8 +20,7 @@ dataController.getAllCards = async (req, res, next) => {
 };
 
 dataController.getSummary = async (req, res, next) => {
-  const appQueryString =
-    "SELECT a.*, c.company_name, s.status_name FROM applications a LEFT OUTER JOIN companies c ON a.company_id = c.company_id LEFT OUTER JOIN status s ON s.status_id = a.app_status";
+  const appQueryString = "SELECT a.*, s.status_name FROM applications a LEFT OUTER JOIN status s ON s.status_id = a.app_status";
 
   db.query(appQueryString)
     .then(async (data) => {
@@ -78,10 +76,10 @@ dataController.getOneCard = async (req, res, next) => {
 
 dataController.addCard = async (req, res, next) => {
   const application = req.body;
-  const query = `INSERT INTO applications (app_id, position_name, company_id, app_status, next_status, job_listing, location, notes, sent, sifted, phone_screen, interview1, interview2, on_site, offer, offer_amount, offer_amount2, accepted, declined, rejected, archived) VALUES ('${application.app_id}', '${application.position_name}', '${application.company_id}', '${application.app_status}', '${application.next_status}', '${application.job_listing}', '${application.location}', '${application.notes}', '${application.sent}', '${application.sifted}', '${application.phone_screen}', '${application.interview1}', '${application.interview2}', '${application.on_site}', '${application.offer}', '${application.offer_amount}', '${application.offer_amount2}', '${application.accepted}', '${application.accepted}', '${application.declined}', '${application.rejected}', '${application.archived}') RETURNING app_id`;
+  const query = `INSERT INTO applications (position_name, company_name, app_status, next_status, job_listing, location, app_notes, app_sent, sifted, phone_screen, interview1, interview2, on_site, offer, offer_amount, offer_amount2, accepted, declined, rejected, archived) VALUES ('${application.position_name}', '${application.company_name}', '${application.app_status}', '${application.next_status}', '${application.job_listing}', '${application.location}', '${application.app_notes}', '${application.app_sent}', '${application.sifted}', '${application.phone_screen}', '${application.interview1}', '${application.interview2}', '${application.on_site}', '${application.offer}', '${application.offer_amount}', '${application.offer_amount2}', '${application.accepted}', '${application.declined}', '${application.rejected}', '${application.archived}') RETURNING app_id`;
   db.query(query)
     .then((data) => {
-      res.locals.newCard = data;
+      res.locals.newCard = data.rows;
       next();
     })
     .catch((err) => {
@@ -94,8 +92,10 @@ dataController.addCard = async (req, res, next) => {
 };
 
 dataController.updateCard = async (req, res, next) => {
+  console.log("in updateCard")
   const application = req.body;
-  const query = `UPDATE applications SET (position_name = '${application.position_name}', company_id = '${application.company_id}', app_status = '${application.app_status}', next_status = '${application.next_status}', job_listing = '${application.job_listing}', location = '${application.location}', notes = '${application.notes}', sent = '${application.sent}', sifted = '${application.sifted}', phone_screen = '${application.phone_screen}', interview1 = '${application.interview1}', interview2 = '${application.interview2}', on_site = '${application.on_site}', offer = '${application.offer}', offer_amount = '${application.offer_amount}', offer_amount2 ='${application.offer_amount2}', accepted = '${application.accepted}', declined = '${application.declined}', rejected = '${application.rejected}', archived = '${application.archived}') WHERE app_id = '${application.app_id}`;
+  const { id } = req.params;
+  const query = `UPDATE applications SET position_name='${application.position_name}', company_name='${application.company_name}', app_status='${application.app_status}', next_status='${application.next_status}', job_listing='${application.job_listing}', location='${application.location}', app_notes='${application.app_notes}', app_sent='${application.app_sent}', sifted='${application.sifted}', phone_screen='${application.phone_screen}', interview1='${application.interview1}', interview2='${application.interview2}', on_site='${application.on_site}', offer='${application.offer}', offer_amount='${application.offer_amount}', offer_amount2='${application.offer_amount2}', accepted='${application.accepted}', declined='${application.declined}', rejected='${application.rejected}', archived='${application.archived}' WHERE app_id = '${id}'`;
 
   db.query(query)
     .then((data) => {
