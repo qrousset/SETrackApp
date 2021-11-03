@@ -105,6 +105,7 @@ CREATE TABLE applications (
     job_listing character varying,
     location character varying,
     app_notes character varying,
+    next_status_date date,
     app_sent date,
     sifted date,
     phone_screen date,
@@ -140,5 +141,5 @@ CREATE SEQUENCE next_status_seq
     CACHE 1;
 
 ALTER TABLE next_status_seq OwNER TO ruoikmfq;
-ALTER SEQUENCE next_status_seq OWNED BY next_status;
+ALTER SEQUENCE next_status_seq OWNED BY applications.next_status;
 
