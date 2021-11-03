@@ -23,6 +23,15 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    axios
+      .post("/authenticate/signin", {
+        username: data.get("email"),
+        password: data.get("password"),
+      })
+      .then(function (response) {
+        console.log(response);
+      });
   };
 
   return (
@@ -78,7 +87,12 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
+<<<<<<< HEAD
               <Grid item xs></Grid>
+=======
+              <Grid item xs>
+              </Grid>
+>>>>>>> dev
               <Grid item>
                 <NavLink to="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}

@@ -7,9 +7,9 @@ const authenticationController = require("../Controllers/authenticationControlle
 // initalize authentication router
 const authenticationRouter = express.Router();
 
-authenticationRouter.get(
-  "/login",
-  authenticationController.login,
+authenticationRouter.post(
+  "/signin",
+  authenticationController.signin,
   (req, res) => {
     if(!res.locals.authenticated) { res.status(200).send('invalid username or password')}
     else { res.status(200).json(res.locals.userAuthenticated); }

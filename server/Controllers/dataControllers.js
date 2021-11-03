@@ -20,7 +20,10 @@ dataController.getAllCards = async (req, res, next) => {
 };
 
 dataController.getSummary = async (req, res, next) => {
-  const appQueryString = "SELECT a.*, s.status_name FROM applications a LEFT OUTER JOIN status s ON s.status_id = a.app_status";
+  const id_user = res.locals.id_user;
+  if(!id_user) next();
+  
+  const appQueryString = `SELECT a.*, s.status_name FROM applications a LEFT OUTER JOIN status s ON s.status_id = a.app_status WHERE id_user = '${id_user}'`;
 
   db.query(appQueryString)
     .then(async (data) => {
@@ -33,7 +36,6 @@ dataController.getSummary = async (req, res, next) => {
 
         const curObj = {
           application_id: curCard.app_id,
-          company_id: curCard.company_id,
           company_name: curCard.company_name,
           user_id: curCard.user_id,
           job_listing: curCard.job_listing,
@@ -76,7 +78,7 @@ dataController.getOneCard = async (req, res, next) => {
 
 dataController.addCard = async (req, res, next) => {
   const application = req.body;
-  const query = `INSERT INTO applications (position_name, company_name, app_status, next_status, job_listing, location, app_notes, app_sent, sifted, phone_screen, interview1, interview2, on_site, offer, offer_amount, offer_amount2, accepted, declined, rejected, archived) VALUES ('${application.position_name}', '${application.company_name}', '${application.app_status}', '${application.next_status}', '${application.job_listing}', '${application.location}', '${application.app_notes}', '${application.app_sent}', '${application.sifted}', '${application.phone_screen}', '${application.interview1}', '${application.interview2}', '${application.on_site}', '${application.offer}', '${application.offer_amount}', '${application.offer_amount2}', '${application.accepted}', '${application.declined}', '${application.rejected}', '${application.archived}') RETURNING app_id`;
+  const query = `INSERT INTO applications (id_user, position_name, company_name, app_status, next_status, job_listing, location, app_notes, app_sent, sifted, phone_screen, interview1, interview2, on_site, offer, offer_amount, offer_amount2, accepted, declined, rejected, archived) VALUES ('${application.id_user}', '${application.position_name}', '${application.company_name}', '${application.app_status}', '${application.next_status}', '${application.job_listing}', '${application.location}', '${application.app_notes}', '${application.app_sent}', '${application.sifted}', '${application.phone_screen}', '${application.interview1}', '${application.interview2}', '${application.on_site}', '${application.offer}', '${application.offer_amount}', '${application.offer_amount2}', '${application.accepted}', '${application.declined}', '${application.rejected}', '${application.archived}') RETURNING app_id`;
   db.query(query)
     .then((data) => {
       res.locals.newCard = data.rows;
