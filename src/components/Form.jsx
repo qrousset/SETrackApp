@@ -46,7 +46,6 @@ export default function FormPropsTextFields(props) {
         <div className="notes">
           <TextField
             id="outlined-multiline-flexible"
-            style="width: 100%"
             label="Notes"
             multiline
             maxRows={6}

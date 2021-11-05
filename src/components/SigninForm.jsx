@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const theme = createTheme();
 
@@ -18,7 +19,6 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
     console.log({
       email: data.get("email"),
       password: data.get("password"),
@@ -31,6 +31,9 @@ export default function SignIn() {
       })
       .then(function (response) {
         console.log(response);
+        if (response.data === true) {
+          return (<NavLink to="/home" />);
+        }
       });
   };
 
@@ -87,12 +90,7 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
-<<<<<<< HEAD
               <Grid item xs></Grid>
-=======
-              <Grid item xs>
-              </Grid>
->>>>>>> dev
               <Grid item>
                 <NavLink to="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
